@@ -1,0 +1,92 @@
+.aboutSection {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem; /* py-16 px-4 */
+}
+
+/* Container for both text and image */
+.aboutContentContainer {
+  display: flex;
+  flex-direction: column; /* Stack image and text on small screens */
+  align-items: center;
+  gap: 2rem; /* Space between text/image */
+  max-width: 64rem; /* Adjust max width as needed, e.g., max-w-5xl or 6xl */
+  width: 100%;
+}
+
+.contentWrapper {
+  /* Removed max-width from here, handled by aboutContentContainer */
+  text-align: center;
+  flex: 1; /* Allow text content to take available space */
+}
+
+.imageWrapper {
+  flex-shrink: 0; /* Prevent image wrapper from shrinking */
+  max-width: 250px; /* Slightly smaller max size */
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.aboutImage {
+  border-radius: 50%; /* Make image round */
+  border: 3px solid #4b5563; /* Add a subtle border (gray-600) */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Enforce square aspect ratio */
+  object-fit: cover; /* Cover the area, cropping if needed */
+}
+
+.heading {
+  font-size: 1.875rem; /* text-3xl */
+  line-height: 2.25rem;
+  font-weight: 700; /* bold */
+  margin-bottom: 1.5rem; /* mb-6 */
+}
+
+.paragraph {
+  font-size: 1.125rem; /* text-lg */
+  line-height: 1.75rem;
+  margin-bottom: 1rem; /* mb-4 */
+  text-align: left; /* Align text left on larger screens */
+}
+
+/* Media queries for responsiveness */
+@media (min-width: 768px) { /* md */
+  .aboutSection {
+    padding: 4rem 2rem; /* px-8 */
+  }
+  .aboutContentContainer {
+    flex-direction: row;
+    align-items: center; /* Center items vertically */
+    gap: 3rem;
+  }
+  .imageWrapper {
+    margin-bottom: 0;
+    order: 0; /* Put image on the left */
+    max-width: 300px; /* Increase size slightly on larger screens */
+  }
+  .contentWrapper {
+    order: 1; /* Put text on the right */
+    text-align: left;
+  }
+  .heading {
+    font-size: 2.25rem; /* text-4xl */
+    line-height: 2.5rem;
+  }
+  .paragraph {
+    font-size: 1.25rem; /* text-xl */
+    line-height: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) { /* lg */
+  .aboutSection {
+    padding: 4rem 4rem; /* px-16 */
+  }
+  .aboutContentContainer {
+    gap: 4rem; /* Increase gap on large screens */
+  }
+} 

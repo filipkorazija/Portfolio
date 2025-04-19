@@ -1,0 +1,6 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* overflow-x: hidden; is already set on body in globals.css */
+} 

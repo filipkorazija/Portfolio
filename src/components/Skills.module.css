@@ -1,0 +1,104 @@
+.skillsSection {
+  min-height: auto; /* Adjust height as needed, maybe not full screen */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem; /* py-16 px-4 */
+  /* background-color: #111827; */ /* Keep black background */
+}
+
+.heading {
+  font-size: 2rem; /* text-3xl adjusted */
+  line-height: 2.5rem;
+  font-weight: 700; /* bold */
+  margin-bottom: 2.5rem; /* mb-10 */
+  text-align: center;
+}
+
+/* Container for all skill items - Changed back to GRID */
+.skillsContainer {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr)); /* 1 column by default */
+  gap: 2rem 1.5rem; /* row-gap column-gap */
+  max-width: 48rem; /* max-w-3xl */
+  width: 100%;
+}
+
+/* Individual skill item container */
+.skillItem {
+  background-color: transparent; /* Remove background from item itself */
+  padding: 0; /* Remove padding */
+  border: none; /* Remove border */
+  /* Remove hover effects from the main item */
+}
+
+/* Flex container for skill name and level percentage */
+.skillInfo {
+  display: flex;
+  justify-content: space-between; /* Keep pushing items apart */
+  align-items: baseline; /* Align text baselines */
+  margin-bottom: 0.5rem; /* mb-2 */
+  gap: 0.75rem; /* Add some minimum gap between name and percentage */
+}
+
+.skillName {
+  font-size: 1rem; /* text-base */
+  color: #e5e7eb; /* gray-200 */
+  font-weight: 500; /* medium */
+  /* Allow name to shrink but prevent overlapping */
+  flex-grow: 1; /* Allow growing if space is ample */
+  flex-shrink: 1; /* Allow shrinking */
+  min-width: 0; /* Important for flex shrink to work with overflow */
+  /* Add text truncation for very long names */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left; /* Ensure text starts from left */
+}
+
+.skillLevel {
+  font-size: 0.875rem; /* text-sm */
+  color: #9ca3af; /* gray-400 */
+  flex-shrink: 0; /* Prevent percentage from shrinking */
+}
+
+/* Progress bar container */
+.progressBarContainer {
+  width: 100%;
+  height: 8px; /* Adjust height */
+  background-color: #374151; /* gray-700 - background of the bar */
+  border-radius: 4px; /* rounded-full */
+  overflow: hidden; /* Ensure fill stays within bounds */
+}
+
+/* The filled part of the progress bar */
+.progressBarFill {
+  height: 100%;
+  background: linear-gradient(to right, #3b82f6, #60a5fa); /* Example gradient blue-600 to blue-400 */
+  border-radius: 4px;
+  /* Width is set by framer-motion animation */
+}
+
+/* Media Queries - Adjust grid columns */
+@media (min-width: 768px) { /* md */
+  .skillsContainer {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns */
+    max-width: 56rem; /* max-w-4xl */
+    gap: 2.5rem 2rem;
+  }
+  .heading {
+    font-size: 2.25rem; /* text-4xl */
+  }
+}
+
+@media (min-width: 1024px) { /* lg */
+  .skillsSection {
+    padding: 5rem 4rem; /* py-20 px-16 */
+  }
+  .skillsContainer {
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 columns */
+    max-width: 72rem; /* max-w-6xl */
+    gap: 3rem 2.5rem;
+  }
+} 
