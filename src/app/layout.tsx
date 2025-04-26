@@ -12,7 +12,7 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "My Portfolio",
+  title: "Filip Koražija",
   description: "A minimalistic portfolio website.",
 };
 

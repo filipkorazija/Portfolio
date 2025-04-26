@@ -5,22 +5,6 @@ import { TypeAnimation } from 'react-type-animation';
 import styles from './Hero.module.css'; // Import CSS Module
 
 const HeroSection: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(true);
-
-  // Scroll handler to hide/show arrow based on scroll position
-  useEffect(() => {
-    // Initially ensure the arrow is visible
-    setIsVisible(true);
-    
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      // Hide when scrolled down (about 20% of viewport height)
-      setIsVisible(scrollPosition < window.innerHeight * 0.2);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Function to scroll to the About section
   const scrollToNextSection = () => {

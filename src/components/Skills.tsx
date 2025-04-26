@@ -8,8 +8,8 @@ import styles from './Skills.module.css';
 // Updated Skills Data with proficiency levels (0-100)
 // Replace with your actual skills and self-assessed levels!
 const skillsData = [
-  { name: "JavaScript", level: 75 },
-  { name: "TypeScript", level: 65 },
+  { name: "PHP", level: 75 },
+  { name: "TSX / JS", level: 65 },
   { name: "React", level: 80 },
   { name: "Next.js", level: 90 }, // Example 90%
   { name: "Node.js", level: 60 },

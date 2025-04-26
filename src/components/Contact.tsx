@@ -6,14 +6,14 @@ import styles from './Contact.module.css';
 
 const ContactSection: React.FC = () => {
   // Replace with your actual email address
-  const email = "your.email@example.com";
+  const email = "verkkorazijaf@gmail.com";
   // Replace with your actual profile URLs
-  const githubUrl = "#";
-  const linkedinUrl = "#";
+  const githubUrl = "https://github.com/filipkorazija";
+  const linkedinUrl = "https://www.linkedin.com/in/filip-kora%C5%BEija-8818112b5/";
 
   return (
     <AnimatedSection id="contact" className={styles.contactSection}>
-      <h2 className={styles.heading}>Get In Touch</h2>
+      <h2 className={styles.heading}>Let&apos;s Connect</h2>
       <p className={styles.paragraph}>
         I'm always open to discussing new projects, creative ideas or opportunities.
         Feel free to reach out if you think I could be a good fit!
