@@ -15,7 +15,7 @@ const ContactSection: React.FC = () => {
     <AnimatedSection id="contact" className={styles.contactSection}>
       <h2 className={styles.heading}>Let&apos;s Connect</h2>
       <p className={styles.paragraph}>
-        I'm always open to discussing new projects, creative ideas or opportunities.
+        I&apos;m always open to discussing new projects, creative ideas or opportunities.
         Feel free to reach out if you think I could be a good fit!
       </p>
       <a href={`mailto:${email}`} className={styles.emailLink}>

@@ -37,6 +37,11 @@ const AboutSection: React.FC = () => {
             In my free time, I like coding personal projects, gaming, and spending time outdoors.
             Feel free to look around!
           </p>
+          <p className={styles.paragraph}>
+            Beyond the code, I&apos;m passionate about gaming (especially strategy and RPGs),
+            exploring new technologies, and occasionally diving into a good sci-fi novel.
+            I believe in continuous learning and applying that curiosity to solve real-world problems.
+          </p>
           {/* Add more paragraphs or details as needed */}
         </div>
       </div>

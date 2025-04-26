@@ -1,6 +1,6 @@
 'use client'; // Needed for the animation library
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import styles from './Hero.module.css'; // Import CSS Module
 
