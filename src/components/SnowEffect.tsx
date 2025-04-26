@@ -99,6 +99,7 @@ const SnowEffect: React.FC = () => {
       window.removeEventListener('resize', handleResize);
       // Setting length to 0 is safer than assigning a new array to the ref's .current
       // This clears the array for potential remounts without violating ref rules.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       snowflakes.current.length = 0;
     };
   }, []); // Empty dependency array ensures this runs once on mount

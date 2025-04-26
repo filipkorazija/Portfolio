@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'; // Import useState, useEffect
 import { createPortal } from 'react-dom'; // Import createPortal
+import Image from 'next/image'; // Import Next.js Image
 import AnimatedSection from './AnimatedSection'; // Import the animation wrapper
 import { motion } from 'framer-motion'; // Import motion for individual card animation
 import styles from './Projects.module.css'; // Import CSS Module
@@ -75,7 +76,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, imageUrl,
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       {imageUrl && (
-        <img src={imageUrl} alt={`${title} screenshot`} className={styles.projectImage} />
+        <div className={styles.projectImageWrapper}>
+          <Image 
+            src={imageUrl} 
+            alt={`${title} screenshot`} 
+            fill
+            style={{ objectFit: 'cover' }}
+            className={styles.projectImage} 
+          />
+        </div>
       )}
       <h3 className={styles.projectTitle}>{title}</h3>
       <p className={styles.projectDescription}>{description}</p>
@@ -111,10 +120,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, imageUrl,
               {/* Inner Wrapper */}
               <div className={styles.modalInnerContent}>
                 <button className={styles.closeButton} onClick={closeModal}>&times;</button>
-                <img
+                <Image
                   src={imageGalleryUrls[currentImageIndex]}
                   alt={`Project ${title} - Image ${currentImageIndex + 1}`}
+                  fill
+                  style={{ objectFit: 'contain' }}
                   className={styles.modalImage}
+                  priority={true}
                 />
                 {imageGalleryUrls.length > 1 && (
                   <>
