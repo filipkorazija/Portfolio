@@ -16,7 +16,7 @@ const AboutSection: React.FC = () => {
         <div className={styles.imageWrapper}>
           {/* Use Next.js Image for optimization */}
           <Image
-            src="/profile.jpg" // Remember to replace!
+            src="/profile.png" // Remember to replace!
             alt="Profile Picture"
             width={300} // Specify width
             height={300} // Specify height (should match aspect ratio or adjust objectFit)
