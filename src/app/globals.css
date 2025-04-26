@@ -1,0 +1,72 @@
+/* Reset some basic styles */
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+img,
+ol,
+ul,
+li,
+form,
+label,
+footer,
+header,
+menu,
+nav,
+section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+/* Set base body styles */
+body {
+  background-color: #000000; /* Black background */
+  color: #ffffff; /* White text */
+  font-family: var(--font-fira-code), monospace; /* Use Fira Code from layout.tsx */
+  line-height: 1.6;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  -webkit-font-smoothing: antialiased; /* Smoother fonts on WebKit */
+  -moz-osx-font-smoothing: grayscale; /* Smoother fonts on Firefox */
+}
+
+/* Basic link styling */
+a {
+  color: #60a5fa; /* Tailwind's blue-400 */
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: #93c5fd; /* Tailwind's blue-300 */
+}
+
+/* Basic heading styles */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600; /* semibold */
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+/* Remove list styles */
+ol, ul {
+  list-style: none;
+}
+
+/* Make images responsive by default */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

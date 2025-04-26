@@ -1,0 +1,81 @@
+.heroSection {
+  min-height: 100vh; /* Instead of h-screen */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative; /* Needed for absolute positioning of children like the scroll prompt */
+}
+
+.mainHeading {
+  font-size: 2.25rem; /* text-4xl */
+  line-height: 2.5rem;
+  font-weight: 700; /* bold */
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+.subHeading {
+  font-size: 1.5rem; /* text-2xl */
+  line-height: 2rem;
+}
+
+.scrollPrompt {
+  position: absolute;
+  bottom: 2.5rem; /* bottom-10 */
+  /* Basic bounce animation */
+  animation: bounce 1s infinite;
+  /* Simpler styling for button */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+  z-index: 20; /* Ensure it's above other elements */
+  color: white; /* Make arrow visible against dark backgrounds */
+}
+
+.scrollPrompt:hover {
+  transform: scale(1.2);
+}
+
+.arrow {
+  font-size: 3rem; /* Even bigger arrow */
+  display: block;
+  transition: transform 0.3s ease;
+  color: white; /* Make sure arrow is visible */
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Add glow */
+}
+
+.scrollPrompt:hover .arrow {
+  transform: translateY(5px); /* Small downward movement on hover */
+  color: #ffffff; /* Brighten the arrow on hover */
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8); /* Enhanced glow on hover */
+}
+
+/* Media query for larger screens (md breakpoint: 768px) */
+@media (min-width: 768px) {
+  .mainHeading {
+    font-size: 3.75rem; /* text-6xl */
+    line-height: 1;
+  }
+  .subHeading {
+    font-size: 2.25rem; /* text-4xl */
+    line-height: 2.5rem;
+  }
+  .arrow {
+    font-size: 4rem; /* Even bigger on larger screens */
+  }
+}
+
+/* Simple bounce animation keyframes */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+} 
