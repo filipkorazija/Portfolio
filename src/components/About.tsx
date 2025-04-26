@@ -1,5 +1,5 @@
 import React from 'react';
-import AnimatedSection from './AnimatedSection'; // Import the animation wrapper
+import AnimatedSection from './AnimSection'; // Import the animation wrapper
 import styles from './About.module.css'; // Import CSS Module
 import Image from 'next/image'; // Import Next.js Image component
 

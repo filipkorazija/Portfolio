@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import AnimatedSection from './AnimatedSection';
+import AnimatedSection from './AnimSection';
 import { motion } from 'framer-motion';
 import styles from './Skills.module.css';
 

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'; // Import useState, useEffect
 import { createPortal } from 'react-dom'; // Import createPortal
 import Image from 'next/image'; // Import Next.js Image
-import AnimatedSection from './AnimatedSection'; // Import the animation wrapper
+import AnimatedSection from './AnimSection'; // Import the animation wrapper
 import { motion } from 'framer-motion'; // Import motion for individual card animation
 import styles from './Projects.module.css'; // Import CSS Module
 

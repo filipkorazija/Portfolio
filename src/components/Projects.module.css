@@ -50,16 +50,7 @@
 }
 
 /* MODIFY THIS: Remove fixed height and width/object-fit */
-.projectImage {
-  /* width: 100%; */ /* REMOVED */
-  /* height: 12rem; */ /* REMOVED */
-  /* object-fit: cover; */ /* REMOVED (handled inline or on wrapper) */
-  /* border-radius: 0.375rem; */ /* REMOVED (handled by wrapper) */
-  /* margin-bottom: 1rem; */ /* REMOVED (handled by wrapper) */
-
-  /* Keep if needed for other reasons, but likely not */
-  /* display: block; If you had this */
-}
+/* .projectImage { ... } */
 
 .projectTitle {
   font-size: 1.25rem; /* text-xl */
@@ -181,13 +172,7 @@
 
 
 /* Styles for the Image component itself */
-.modalImage {
-  /* No explicit width/height needed with fill */
-  /* object-fit: contain; is set inline */
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-}
+/* .modalImage { ... } */
 
 .closeButton {
   position: absolute;

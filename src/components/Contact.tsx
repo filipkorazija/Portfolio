@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import AnimatedSection from './AnimatedSection';
+import AnimatedSection from './AnimSection';
 import styles from './Contact.module.css';
 
 const ContactSection: React.FC = () => {
