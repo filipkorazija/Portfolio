@@ -5,7 +5,7 @@ import Footer from '../../components/Footer';
 import styles from './AI.module.css';
 
 export const metadata: Metadata = {
-  title: 'AI — Filip Koražija',
+  title: 'AI: Filip Koražija',
   description: 'My perspective on AI: a daily development companion, independent thinking, and responsibility for the code I ship.',
 };
 

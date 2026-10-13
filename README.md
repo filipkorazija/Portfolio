@@ -1,4 +1,4 @@
-# Filip Koražija — Portfolio V2
+# Filip Koražija: Portfolio V2
 
 A personal project workspace that retains V1's dark palette, Fira Code typography, restrained blue selection, and snowfall.
 

@@ -31,3 +31,6 @@ The user is most active on Discord at `.astonic`. Offer the username with a copy
 
 ## Private workplace projects
 PetrovicAPP and PetrovicSystem are included with user-authorized, general descriptions and technology labels only. Use neutral placeholder artwork. Do not copy workplace source code, screenshots, credentials, endpoints, data, internal workflows, or implementation details into portfolio assets or descriptions. Enterprise source repositories remain read-only.
+
+## Writing preference
+Use simple punctuation and avoid em dashes in portfolio copy, page titles, and labels.
