@@ -1,81 +1,21 @@
-.heroSection {
-  min-height: 100vh; /* Instead of h-screen */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative; /* Needed for absolute positioning of children like the scroll prompt */
+.hero {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 40px; padding-block: 58px 48px;
 }
-
-.mainHeading {
-  font-size: 2.25rem; /* text-4xl */
-  line-height: 2.5rem;
-  font-weight: 700; /* bold */
-  margin-bottom: 1rem; /* mb-4 */
+.hero h1 {
+  font-size: clamp(44px, 6.3vw, 96px); line-height: 1.12;
+  letter-spacing: -.035em; white-space: nowrap;
 }
-
-.subHeading {
-  font-size: 1.5rem; /* text-2xl */
-  line-height: 2rem;
+.introduction { padding-bottom: 5px; flex: 0 0 315px; font-size: 12px; line-height: 1.9; }
+.introduction p:first-child { color: var(--foreground); }
+.introduction p + p { color: var(--muted); margin-top: 8px; }
+@media (max-width: 1200px) {
+  .hero { align-items: flex-start; flex-direction: column; gap: 22px; padding-block: 48px 36px; }
+  .introduction { flex-basis: auto; font-size: 13px; }
+  .desktopBreak { display: none; }
 }
-
-.scrollPrompt {
-  position: absolute;
-  bottom: 2.5rem; /* bottom-10 */
-  /* Basic bounce animation */
-  animation: bounce 1s infinite;
-  /* Simpler styling for button */
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: all 0.3s ease;
-  z-index: 20; /* Ensure it's above other elements */
-  color: white; /* Make arrow visible against dark backgrounds */
+@media (max-width: 640px) {
+  .hero { padding-block: 42px 30px; gap: 18px; }
+  .hero h1 { font-size: clamp(28px, 8.3vw, 48px); letter-spacing: -.025em; }
+  .introduction { font-size: 12px; }
 }
-
-.scrollPrompt:hover {
-  transform: scale(1.2);
-}
-
-.arrow {
-  font-size: 3rem; /* Even bigger arrow */
-  display: block;
-  transition: transform 0.3s ease;
-  color: white; /* Make sure arrow is visible */
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Add glow */
-}
-
-.scrollPrompt:hover .arrow {
-  transform: translateY(5px); /* Small downward movement on hover */
-  color: #ffffff; /* Brighten the arrow on hover */
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8); /* Enhanced glow on hover */
-}
-
-/* Media query for larger screens (md breakpoint: 768px) */
-@media (min-width: 768px) {
-  .mainHeading {
-    font-size: 3.75rem; /* text-6xl */
-    line-height: 1;
-  }
-  .subHeading {
-    font-size: 2.25rem; /* text-4xl */
-    line-height: 2.5rem;
-  }
-  .arrow {
-    font-size: 4rem; /* Even bigger on larger screens */
-  }
-}
-
-/* Simple bounce animation keyframes */
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-  }
-  50% {
-    transform: translateY(0);
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  }
-} 

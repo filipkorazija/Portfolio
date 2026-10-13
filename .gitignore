@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local design review evidence and temporary payloads
+.impeccable/review/
+.impeccable/questions/
+.impeccable/portfolio-brief-body.md

@@ -1,226 +1,140 @@
-/* Projects Section Container */
-.projectsSection {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem 1rem; /* py-16 px-4 */
+.projects { scroll-margin-top: 25px; padding-bottom: 94px; }
+.toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 17px; border-bottom: 1px solid var(--line);
+}
+.toolbar h2 { font-size: 21px; letter-spacing: -.02em; }
+.filters { display: flex; gap: 25px; }
+.filters button {
+  background: transparent; border: 0; padding: 8px 0; min-height: 44px;
+  font-size: 12px; color: var(--muted);
+}
+.filters button[aria-pressed="true"] { color: var(--foreground); text-decoration: underline; text-underline-offset: 7px; }
+.filters button:hover { color: var(--accent); }
+.workspace {
+  display: grid; grid-template-columns: minmax(260px, .36fr) minmax(0, 1fr);
+  gap: 44px; margin-top: 22px; align-items: start;
+}
+.projectIndex { display: flex; flex-direction: column; }
+.projectRow {
+  display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 15px;
+  padding: 18px 17px; margin: 0; background: transparent;
+  border: 0; border-bottom: 1px solid var(--line); text-align: left;
+  min-height: 86px; transition: color 180ms, background-color 180ms;
+}
+.projectRow strong { display: block; font-weight: 400; font-size: 20px; line-height: 1.4; letter-spacing: -.025em; }
+.projectRow small { display: block; font-size: 11px; color: var(--muted); line-height: 1.6; margin-top: 4px; }
+.projectRow svg { color: #758398; flex: 0 0 auto; }
+.projectRow[aria-selected="true"] { background: #17202d; color: var(--accent); }
+.projectRow[aria-selected="true"] svg { color: var(--accent); }
+.projectRow:hover { background: #131923; }
+.projectRow[aria-selected="true"]:hover { background: #1b2637; }
+.projectRow:focus-visible { outline-offset: -3px; }
+.repositoryLink { display: inline-flex; align-items: center; min-height: 44px; margin: 20px 17px 0; font-size: 12px; color: var(--muted); text-decoration: underline; }
+.repositoryLink:hover { color: var(--accent); }
+.inspector { min-width: 0; }
+.previewTop { display: flex; align-items: center; justify-content: space-between; gap: 15px; font-size: 11px; color: var(--muted); min-height: 35px; padding: 0 0 10px; }
+.previewTop button { display: flex; gap: 9px; align-items: center; background: transparent; border: 0; padding: 5px; font-size: 11px; color: var(--foreground); min-height: 35px; }
+.previewTop button:hover { color: var(--accent); }
+.preview { position: relative; height: 285px; }
+.imageLayer { position: absolute; inset: 0; animation: image-reveal 420ms cubic-bezier(.16,1,.3,1); }
+.imageError { position: absolute; inset: 0; display: flex; justify-content: center; flex-direction: column; align-items: center; gap: 10px; background: var(--surface); font-size: 13px; }
+.thumbnails { display: flex; align-items: center; gap: 9px; margin-top: 12px; }
+.thumbnails button { position: relative; width: 64px; height: 44px; padding: 0; background: var(--surface); border: 1px solid var(--line); opacity: .65; overflow: hidden; }
+.thumbnails button[aria-pressed="true"] { opacity: 1; border: 2px solid var(--accent); }
+.thumbnails button:hover { opacity: 1; }
+.thumbnails > span { font-size: 11px; color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.projectDetails { padding-top: 22px; }
+.detailHeading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
+.detailHeading h3 { font-size: 23px; line-height: 1.4; letter-spacing: -.025em; }
+.detailHeading > span { color: var(--muted); font-size: 11px; }
+.projectDetails > p { color: var(--muted); font-size: 12px; line-height: 1.9; margin-top: 12px; max-width: 72ch; }
+.projectLinks { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 25px; margin-top: 17px; font-size: 11px; }
+.projectLinks > a, .projectLinks > button { text-decoration: underline; text-underline-offset: 5px; min-height: 34px; display: flex; align-items: center; }
+.projectLinks > button { padding: 0; background: transparent; border: 0; font-size: inherit; }
+.projectLinks > a:hover, .projectLinks > button:hover { color: var(--accent); }
+.technology { color: var(--muted); font-size: 10px; margin-left: auto; }
+.gallery {
+  width: min(1180px, calc(100% - 32px)); max-height: 94svh; overflow-y: auto;
+  padding: 0; border: 1px solid #4b5668; background: var(--background); color: var(--foreground);
+  overscroll-behavior: contain;
+}
+.gallery::backdrop { background: #030508ed; }
+.galleryBody { padding: 20px; }
+.galleryHeader { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; }
+.galleryHeader h2 { font-size: 18px; }
+.galleryImage { height: min(65svh, 660px); position: relative; background: #12151b; }
+.galleryControls { display: flex; justify-content: center; align-items: center; gap: 28px; padding-top: 16px; }
+.galleryControls > span { font-size: 12px; font-variant-numeric: tabular-nums; }
+.iconButton { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); background: var(--surface); }
+.iconButton:hover { border-color: var(--muted); }
+.iconButton:disabled { opacity: .35; }
+@keyframes image-reveal { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+@media (min-width: 1600px) { .preview { height: 340px; } }
+@media (max-width: 1000px) {
+  .workspace { grid-template-columns: 230px minmax(0, 1fr); gap: 28px; }
+  .projectRow { padding-inline: 12px; }
+  .projectRow strong { font-size: 17px; }
+  .projectRow small { font-size: 10px; }
+  .preview { height: 270px; }
+  .detailHeading { display: block; }
+  .detailHeading > span { display: block; margin-top: 4px; }
+  .technology { margin-left: 0; width: 100%; }
+}
+@media (max-width: 640px) {
+  .projects { padding-bottom: 64px; }
+  .toolbar h2 { font-size: 18px; }
+  .filters { gap: 22px; }
+  .workspace { display: flex; flex-direction: column; gap: 25px; margin-top: 14px; }
+  .indexColumn, .inspector { width: 100%; }
+  .projectIndex { display: flex; flex-direction: row; gap: 6px; overflow-x: auto; padding-bottom: 8px; }
+  .projectRow { flex: 0 0 auto; width: auto; min-height: 48px; padding: 10px 14px; border: 1px solid var(--line); }
+  .projectRow strong { font-size: 13px; white-space: nowrap; }
+  .projectRow small, .projectRow svg { display: none; }
+  .repositoryLink { display: none; }
+  .preview { height: 220px; }
+  .thumbnails { gap: 6px; }
+  .thumbnails button { width: 44px; flex: 0 0 44px; }
+  .thumbnails > span { font-size: 10px; }
+  .previewTop { font-size: 10px; }
+  .previewTop button { min-height: 44px; font-size: 11px; }
+  .projectDetails { padding-top: 20px; }
+  .detailHeading h3 { font-size: 22px; }
+  .projectDetails > p { font-size: 12px; }
+  .projectLinks { font-size: 12px; gap: 8px 24px; margin-top: 14px; }
+  .projectLinks > a, .projectLinks > button { min-height: 44px; }
+  .technology { font-size: 10px; }
+  .galleryBody { padding: 12px; }
+  .galleryImage { height: 55svh; }
 }
 
-.heading {
-  font-size: 1.875rem; /* text-3xl */
-  line-height: 2.25rem;
-  font-weight: 700; /* bold */
-  margin-bottom: 2.5rem; /* mb-10 */
-  text-align: center;
+/* A large inventory stays searchable without stretching the page into a list. */
+.indexTools { display: grid; gap: 9px; margin-bottom: 12px; }
+.indexTools input, .indexTools select {
+  font: inherit; font-size: 11px; color: var(--foreground);
+  width: 100%; min-width: 0; height: 44px; padding: 9px 12px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 0;
+  color-scheme: dark;
 }
-
-.gridContainer {
-  display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr)); /* grid-cols-1 */
-  gap: 2rem; /* gap-8 */
-  max-width: 72rem; /* max-w-6xl */
-  width: 100%;
+.indexTools input::placeholder { color: var(--muted); opacity: 1; }
+.resultCount { font-size: 10px; color: var(--muted); margin-bottom: 10px; font-variant-numeric: tabular-nums; }
+.projectIndex { max-height: 460px; overflow-y: auto; overscroll-behavior: contain; }
+.projectDetails > p.projectStatus { color: var(--accent); font-size: 11px; margin-top: 7px; }
+.engineeringNotes, .relatedWork ul { margin: 15px 0 0; padding-left: 18px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+.engineeringNotes li + li, .relatedWork li + li { margin-top: 6px; }
+.relatedWork { margin-top: 20px; }
+.relatedWork h4 { margin: 0; font-size: 12px; font-weight: 500; }
+.relatedWork ul { margin-top: 8px; }
+.galleryNotice { display: block; color: var(--muted); font-size: 11px; font-weight: 400; margin-top: 3px; }
+.emptyState { padding: 70px 25px; text-align: center; background: var(--surface); }
+.emptyState h3 { font-size: 21px; }
+.emptyState p { font-size: 12px; color: var(--muted); margin-top: 16px; }
+.emptyState button { margin-top: 25px; min-height: 44px; background: transparent; border: 0; font-size: 12px; text-decoration: underline; }
+@media (max-width: 640px) {
+  .indexTools { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+  .indexTools input, .indexTools select { font-size: 10px; padding-inline: 8px; }
+  .projectIndex { max-height: none; overflow-y: hidden; }
+  .workspace { gap: 16px; }
+  .previewTop > span { max-width: 235px; }
+  .engineeringNotes, .relatedWork ul { font-size: 12px; }
 }
-
-/* Project Card */
-.projectCard {
-  border: 1px solid #4b5563; /* border-gray-700 */
-  border-radius: 0.5rem; /* rounded-lg */
-  padding: 1.5rem; /* p-6 */
-  background-color: rgba(31, 41, 55, 0.2); /* bg-gray-900/20 approximation */
-  transition: box-shadow 0.3s ease;
-  overflow: visible; /* ADDED/MODIFIED */
-}
-
-.projectCard:hover {
-  /* Approximation of shadow-lg shadow-blue-900/30 */
-  box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.3), 0 4px 6px -4px rgba(30, 58, 138, 0.3);
-}
-
-/* ADD THIS: Styles for the image wrapper in the project card */
-.projectImageWrapper {
-  position: relative; /* CRITICAL: This contains the 'fill' Image */
-  width: 100%;        /* Take full width of the card area */
-  aspect-ratio: 16 / 9; /* Adjust to your images' aspect ratio */
-  overflow: hidden;     /* Hide parts of image outside the aspect ratio */
-  margin-bottom: 1rem;  /* Spacing below image */
-  border-radius: 8px;   /* Apply border-radius to the wrapper */
-}
-
-/* MODIFY THIS: Remove fixed height and width/object-fit */
-/* .projectImage { ... } */
-
-.projectTitle {
-  font-size: 1.25rem; /* text-xl */
-  line-height: 1.75rem;
-  font-weight: 700; /* bold */
-  margin-bottom: 0.5rem; /* mb-2 */
-}
-
-.projectDescription {
-  color: #9ca3af; /* text-gray-400 */
-  margin-bottom: 1rem; /* mb-4 */
-}
-
-.linksContainer {
-  display: flex;
-  gap: 1rem; /* space-x-4 */
-}
-
-.projectLink {
-  color: #60a5fa; /* text-blue-400 */
-  transition: color 0.2s ease;
-}
-
-.projectLink:hover {
-  color: #93c5fd; /* hover:text-blue-300 */
-}
-
-.repoLink {
-  color: #9ca3af; /* text-gray-400 */
-  transition: color 0.2s ease;
-}
-
-.repoLink:hover {
-  color: #d1d5db; /* hover:text-gray-300 */
-}
-
-/* Media Queries for Grid */
-@media (min-width: 768px) { /* md */
-  .projectsSection {
-    padding: 4rem 2rem; /* px-8 */
-  }
-  .heading {
-    font-size: 2.25rem; /* text-4xl */
-    line-height: 2.5rem;
-  }
-  .gridContainer {
-    grid-template-columns: repeat(2, minmax(0, 1fr)); /* md:grid-cols-2 */
-  }
-}
-
-@media (min-width: 1024px) { /* lg */
-  .projectsSection {
-    padding: 4rem 4rem; /* px-16 */
-  }
-  .gridContainer {
-    grid-template-columns: repeat(3, minmax(0, 1fr)); /* lg:grid-cols-3 */
-  }
-}
-
-/* --- Image Gallery Modal Styles --- */
-
-.buttonAsLink {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-  font: inherit; /* Inherit font settings */
-  /* Add any other styles from .projectLink you want to mimic */
-  color: #60a5fa; /* text-blue-400 */
-  transition: color 0.2s ease;
-}
-
-.buttonAsLink:hover {
-  color: #93c5fd; /* hover:text-blue-300 */
-}
-
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8); /* Dark semi-transparent overlay */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Ensure it's above other content */
-}
-
-.modalContent {
-  position: relative; /* Relative for button positioning */
-  background-color: #1f2937;
-  border-radius: 0.5rem;
-  width: 90vw;        /* ADDED: Explicit width */
-  height: 85vh;       /* ADDED: Explicit height */
-  max-width: 90vw;    /* Keep max constraint */
-  max-height: 85vh;   /* Keep max constraint */
-  display: flex;      /* Use flex to help center inner content */
-  justify-content: center;
-  align-items: center;
-  /* overflow: hidden; */
-  padding: 0;
-}
-
-/* Inner content is the direct image container */
-.modalInnerContent {
-  position: relative; /* Relative for Image fill */
-  width: 100%;        /* Fill modalContent */
-  height: 100%;       /* Fill modalContent */
-  display: block;     /* CHANGED: Simpler display type might help */
-  /* Removed flex properties */
-  box-sizing: border-box;
-  padding: 1rem;      /* Re-added padding for inner spacing */
-}
-
-/* REMOVED: Styles for the extra image wrapper */
-/* .modalImageWrapper { ... } */
-
-
-/* Styles for the Image component itself */
-/* .modalImage { ... } */
-
-.closeButton {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem; /* Adjusted position slightly */
-  background: rgba(0, 0, 0, 0.4);
-  border: none;
-  color: #ffffff; /* White for better visibility */
-  font-size: 1.5rem; /* Slightly smaller */
-  line-height: 1;
-  cursor: pointer;
-  border-radius: 50%; /* Make it circular */
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1010; /* Ensure above image */
-}
-
-.closeButton:hover {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.navButton {
-  position: absolute; /* Relative to modalContent */
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.4);
-  color: white;
-  border: none;
-  font-size: 1.8rem; /* Adjusted size */
-  padding: 0.5rem 0.8rem; /* Adjusted padding */
-  cursor: pointer;
-  border-radius: 0.375rem;
-  user-select: none;
-  transition: background-color 0.2s ease;
-  z-index: 1010; /* Ensure above image */
-}
-
-.navButton:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.prevButton {
-  left: 0.5rem; /* Adjusted position */
-}
-
-.nextButton {
-  right: 0.5rem; /* Adjusted position */
-} 

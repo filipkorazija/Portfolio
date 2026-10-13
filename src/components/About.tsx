@@ -1,47 +1,19 @@
-import React from 'react';
-import AnimatedSection from './AnimSection'; // Import the animation wrapper
-import styles from './About.module.css'; // Import CSS Module
-import Image from 'next/image'; // Import Next.js Image component
+import Image from 'next/image';
+import styles from './About.module.css';
 
-const AboutSection: React.FC = () => {
-  return (
-    // Wrap the section content with AnimatedSection
-    <AnimatedSection
-      id="about"
-      className={styles.aboutSection}
-    >
-      {/* New container for text and image */}
-      <div className={styles.aboutContentContainer}>
-        {/* Image Wrapper */}
-        <div className={styles.imageWrapper}>
-          {/* Use Next.js Image for optimization */}
-          <Image
-            src="/profile.jpg" // Remember to replace!
-            alt="Profile Picture"
-            width={300} // Specify width
-            height={300} // Specify height (should match aspect ratio or adjust objectFit)
-            className={styles.aboutImage}
-            // Optional: add priority if it's above the fold
-            // priority
-          />
-        </div>
-
-        {/* Text Content Wrapper */}
-        <div className={styles.contentWrapper}>
-          <h2 className={styles.heading}>About Me</h2>
-          <p className={styles.paragraph}>
-            Hello! I&apos;m Filip Koražija, passionate about Computer Science. 
-            I enjoy building things for the web, solving complex problems, and learning new technologies.
-          </p>
-          <p className={styles.paragraph}>
-            In my free time, I like coding personal projects, gaming, and spending time outdoors.
-            Feel free to look around!
-          </p>
-          {/* Add more paragraphs or details as needed */}
-        </div>
-      </div>
-    </AnimatedSection>
-  );
-};
-
-export default AboutSection; 
+export default function AboutSection() {
+  return <section id="about" className={'container ' + styles.about}>
+    <div className={styles.portrait}>
+      <Image src="/profile.jpg" alt="Filip Koražija outdoors" fill
+        sizes="(max-width: 640px) 90vw, 340px"
+        style={{ objectFit: 'cover', objectPosition: 'center 30%' }} />
+    </div>
+    <div className={styles.story}>
+      <h2>About Filip</h2>
+      <p>I enjoy building for the web, solving complex problems, and learning new technologies.</p>
+      <p>My work spans multiplayer networks, cloud anti-cheat systems, enterprise applications, mobile games, and AI-assisted tools. I also explore robotics and virtual reality through university projects.</p>
+      <p>Outside of coding, I spend my time gaming and getting outdoors.</p>
+      <a href="https://www.linkedin.com/in/filip-verk-kora%C5%BEija-8818112b5/?isSelfProfile=true" target="_blank" rel="noopener noreferrer" className="text-link">Find me on LinkedIn</a>
+    </div>
+  </section>;
+}

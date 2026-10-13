@@ -1,232 +1,168 @@
-'use client'; // Mark as client component because it uses framer-motion
+'use client';
+import { useEffect, useRef, useState } from 'react';
+import type { KeyboardEvent } from 'react';
+import Image from 'next/image';
+import Icon from './Icon';
+import { categories, projects, type Project } from './project-data';
+import styles from './Projects.module.css';
+import useMedia from './useMedia';
 
-import React, { useState, useEffect } from 'react'; // Import useState, useEffect
-import { createPortal } from 'react-dom'; // Import createPortal
-import Image from 'next/image'; // Import Next.js Image
-import AnimatedSection from './AnimSection'; // Import the animation wrapper
-import { motion } from 'framer-motion'; // Import motion for individual card animation
-import styles from './Projects.module.css'; // Import CSS Module
-
-// Define an interface for Project props for type safety
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  imageUrl?: string; // Optional image URL
-  projectUrl?: string; // Optional link to live project
-  projectLinkLabel?: string; // Optional label for the project link
-  repoUrl?: string; // Optional link to GitHub repo
-  imageGalleryUrls?: string[]; // Optional array of images for gallery
-  externalLinks?: { label: string; url: string }[]; // Optional array for external links (e.g., videos)
-}
-
-// Reusable Project Card component - now wrapped with motion.div
-const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, imageUrl, projectUrl, projectLinkLabel, repoUrl, imageGalleryUrls, externalLinks }) => {
-  // State for modal visibility and current image index
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  // State to track if component is mounted (for portal)
-  const [isMounted, setIsMounted] = useState(false);
-
-  // Set mounted state only on client-side
+function Gallery({ project, initialImage, close }: { project: Project; initialImage: number; close: () => void }) {
+  const dialog = useRef<HTMLDialogElement>(null);
+  const [index, setIndex] = useState(initialImage);
+  const images = [project.image, ...(project.gallery ?? [])];
+  const step = (direction: number) => setIndex(current => (current + direction + images.length) % images.length);
   useEffect(() => {
-    setIsMounted(true);
-    // Optional: Add cleanup for body overflow style if needed
-    // return () => { document.body.style.overflow = 'auto'; };
+    const element = dialog.current;
+    const previousOverflow = document.body.style.overflow;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    element?.showModal();
+    document.body.style.overflow = 'hidden';
+    return () => {
+      element?.close();
+      document.body.style.overflow = previousOverflow;
+      previouslyFocused?.focus();
+    };
   }, []);
 
-  // Define animation variants for the card
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+  return <dialog ref={dialog} className={styles.gallery} aria-labelledby="gallery-title"
+    onCancel={close}
+    onClick={event => { if (event.target === event.currentTarget) close(); }}
+    onKeyDown={event => {
+      if (event.key === 'ArrowRight') { event.preventDefault(); step(1); }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); step(-1); }
+    }}>
+    <div className={styles.galleryBody}>
+      <div className={styles.galleryHeader}>
+        <h2 id="gallery-title">{project.title}{project.placeholder && <small className={styles.galleryNotice}>Placeholder artwork</small>}</h2>
+        <button type="button" className={styles.iconButton} aria-label="Close gallery" onClick={close} autoFocus><Icon name="close" /></button>
+      </div>
+      <div className={styles.galleryImage}>
+        <Image src={images[index]} alt={project.title + ' image ' + (index + 1)} fill
+          sizes="(max-width: 640px) 95vw, 1100px" style={{ objectFit: 'contain' }} priority />
+      </div>
+      <div className={styles.galleryControls}>
+        <button type="button" className={styles.iconButton} onClick={() => step(-1)} aria-label="Previous image" disabled={images.length === 1}>
+          <Icon name="chevron" style={{ transform: 'rotate(180deg)' }} />
+        </button>
+        <span aria-live="polite">{index + 1} / {images.length}</span>
+        <button type="button" className={styles.iconButton} onClick={() => step(1)} aria-label="Next image" disabled={images.length === 1}><Icon name="chevron" /></button>
+      </div>
+    </div>
+  </dialog>;
+}
+
+export default function ProjectsSection() {
+  const mobile = useMedia('(max-width: 640px)');
+  const [scope, setScope] = useState('All');
+  const [category, setCategory] = useState('All');
+  const [query, setQuery] = useState('');
+  const [selectedId, setSelectedId] = useState(projects[0].id);
+  const [imageIndex, setImageIndex] = useState(0);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const visible = projects.filter(project => {
+    const searchable = [project.title, project.kind, project.description, project.role, ...project.tags, ...(project.relatedWork ?? [])].join(' ').toLowerCase();
+    return (scope === 'All' || project.featured) &&
+      (category === 'All' || project.category === category) &&
+      searchable.includes(query.trim().toLowerCase());
+  });
+  const selected = visible.find(project => project.id === selectedId) ?? visible[0];
+  const images = selected ? [selected.image, ...(selected.gallery ?? [])] : [];
+  const resetPreview = () => { setImageIndex(0); setImageError(false); setGalleryOpen(false); };
+  const selectProject = (id: string) => { setSelectedId(id); resetPreview(); };
+  const changeScope = (value: string) => {
+    setScope(value); setCategory('All'); setQuery(''); resetPreview();
+  };
+  const clearSearch = () => { setQuery(''); setCategory('All'); setScope('All'); resetPreview(); };
+  const navigateIndex = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    let next = index;
+    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') next = (index + 1) % visible.length;
+    else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') next = (index - 1 + visible.length) % visible.length;
+    else if (event.key === 'Home') next = 0;
+    else if (event.key === 'End') next = visible.length - 1;
+    else return;
+    event.preventDefault();
+    selectProject(visible[next].id);
+    document.getElementById('project-tab-' + visible[next].id)?.focus();
   };
 
-  // Handlers for modal
-  const openModal = () => {
-    setCurrentImageIndex(0); // Reset to first image
-    setIsModalOpen(true);
-    // Optional: Prevent body scroll when modal is open
-    // document.body.style.overflow = 'hidden';
-  };
+  return <section id="projects" className={'container ' + styles.projects}>
+    <div className={styles.toolbar}>
+      <h2>Projects</h2>
+      <div className={styles.filters} aria-label="Project collection">
+        {['Selected', 'All'].map(value => <button key={value} type="button"
+          aria-pressed={scope === value} onClick={() => changeScope(value)}>{value === 'All' ? 'All ' + projects.length : value}</button>)}
+      </div>
+    </div>
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    // Optional: Restore body scroll
-    // document.body.style.overflow = 'auto';
-  };
-
-  const showNextImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === (imageGalleryUrls?.length ?? 0) - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const showPrevImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? (imageGalleryUrls?.length ?? 1) - 1 : prevIndex - 1
-    );
-  };
-
-  return (
-    <motion.div
-      className={styles.projectCard}
-      variants={cardVariants}
-      // Initial and animate props will be controlled by the parent AnimatedSection's stagger
-      // Add hover scale effect directly via Tailwind or Framer Motion's whileHover
-      whileHover={{ scale: 1.03 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-    >
-      {imageUrl && (
-        <div className={styles.projectImageWrapper}>
-          <Image 
-            src={imageUrl} 
-            alt={`${title} screenshot`} 
-            fill
-            style={{ objectFit: 'cover' }}
-            className={styles.projectImage} 
-          />
+    <div className={styles.workspace}>
+      <div className={styles.indexColumn}>
+        <div className={styles.indexTools}>
+          <label className="visually-hidden" htmlFor="project-search">Search projects</label>
+          <input id="project-search" type="search" value={query} placeholder="Project or technology"
+            onChange={event => { setQuery(event.target.value); setScope('All'); resetPreview(); }} />
+          <label className="visually-hidden" htmlFor="project-category">Project category</label>
+          <select id="project-category" value={category} onChange={event => { setCategory(event.target.value); setScope('All'); resetPreview(); }}>
+            <option value="All">All categories</option>
+            {categories.map(value => <option key={value} value={value}>{value}</option>)}
+          </select>
         </div>
-      )}
-      <h3 className={styles.projectTitle}>{title}</h3>
-      <p className={styles.projectDescription}>{description}</p>
-      <div className={styles.linksContainer}>
-        {projectUrl && (
-          <a href={projectUrl} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
-            {projectLinkLabel || 'View Project'}
-          </a>
-        )}
-        {imageGalleryUrls && imageGalleryUrls.length > 0 && (
-          <button onClick={openModal} className={`${styles.projectLink} ${styles.buttonAsLink}`}>
-            View Images
-          </button>
-        )}
-        {/* Render external links */}
-        {externalLinks && externalLinks.map((link, index) => (
-          <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
-            {link.label}
-          </a>
-        ))}
-        {repoUrl && (
-          <a href={repoUrl} target="_blank" rel="noopener noreferrer" className={styles.repoLink}>
-            GitHub Repo
-          </a>
-        )}
+        <p className={styles.resultCount} role="status">{visible.length} of {projects.length} projects</p>
+        <div className={styles.projectIndex} role="tablist" aria-label="Project index" aria-orientation={mobile ? 'horizontal' : 'vertical'}>
+          {visible.map((project, index) => <button key={project.id} type="button" role="tab"
+            id={'project-tab-' + project.id}
+            aria-selected={selected?.id === project.id}
+            aria-controls={'project-panel-' + project.id}
+            tabIndex={selected?.id === project.id ? 0 : -1}
+            onClick={() => selectProject(project.id)}
+            onKeyDown={event => navigateIndex(event, index)}
+            className={styles.projectRow}>
+            <span><strong>{project.title}</strong><small>{project.kind}</small></span>
+            <Icon name="chevron" size={17} />
+          </button>)}
+        </div>
+        <a href="https://github.com/filipkorazija" target="_blank" rel="noopener noreferrer" className={styles.repositoryLink}>More on GitHub</a>
       </div>
 
-      {/* Image Gallery Modal - Render using Portal only when mounted */}
-      {isMounted && isModalOpen && imageGalleryUrls && imageGalleryUrls.length > 0 &&
-        createPortal(
-          <div className={styles.modalOverlay} onClick={closeModal}>
-            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}> {/* Prevent closing when clicking content */}
-              {/* Inner Wrapper */}
-              <div className={styles.modalInnerContent}>
-                <button className={styles.closeButton} onClick={closeModal}>&times;</button>
-                <Image
-                  src={imageGalleryUrls[currentImageIndex]}
-                  alt={`Project ${title} - Image ${currentImageIndex + 1}`}
-                  fill
-                  style={{ objectFit: 'contain' }}
-                  className={styles.modalImage}
-                  priority={true}
-                />
-                {imageGalleryUrls.length > 1 && (
-                  <>
-                    <button className={`${styles.navButton} ${styles.prevButton}`} onClick={showPrevImage}>&#10094;</button>
-                    <button className={`${styles.navButton} ${styles.nextButton}`} onClick={showNextImage}>&#10095;</button>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>,
-          document.body // Render the modal directly into the body
-        )
-      }
-    </motion.div>
-  );
-};
-
-// Main Projects Section component
-const ProjectsSection: React.FC = () => {
-  // Placeholder project data - replace with your actual projects
-  const projects: ProjectCardProps[] = [
-    {
-      title: "Portfolio",
-      description: "A dynamic and fully responsive portfolio built with Next.js, CSS, and TypeScript — crafted to bring my work and ideas to life with smooth animations and clean design.",
-      imageUrl: "/portfolio.png", // Replace with actual image path
-      projectUrl: "#", // Replace with actual URL
-    },
-    {
-      title: "Minecraft Server",
-      description: "Founder and developer of ProjectIce, a Minecraft network that grew to over 150 players at peak times and built a strong daily community of 50+ players over three exciting years.",
-      imageUrl: "/minecraft5.png", // Replace with actual image path
-      // projectUrl: "#", // Removed projectUrl
-      imageGalleryUrls: [
-        "/minecraft-gallery/minecraft1.png", // Replace with actual image paths
-        "/minecraft-gallery/minecraft2.png",
-        "/minecraft-gallery/minecraft3.png",
-        "/minecraft-gallery/minecraft4.png",
-      ],
-      externalLinks: [
-        { label: "View Video", url: "https://www.youtube.com/watch?v=eZKA4ho3-ao" } // Replace with actual URL
-      ],
-    },
-    {
-      title: "E-Classroom (Noodle)",
-      description: "Co-creator of Noodle, a collaborative project turned full-fledged e-learning platform, where teachers build classrooms, assign tasks, create exams, and students can partake.",
-      imageUrl: "/eclassroom.png", // Replace with actual image path
-      imageGalleryUrls: [
-        "/eclassroom-gallery/eclassroom1.png", // Replace with actual image paths
-        "/eclassroom-gallery/eclassroom2.png",
-        "/eclassroom-gallery/eclassroom3.png",
-        "/eclassroom-gallery/eclassroom4.png",
-      ],
-    },
-    {
-      title: "Archive",
-      description: "Built a custom archive platform for a client, designed to organize detailed records of employees, their project assignments, accommodation history, dates, and key documentation — all in one easy-to-navigate system.",
-      imageUrl: "/archive.png", // Replace with actual image path
-    },
-    {
-      title: "CarbonSpigot",
-      description: "Worked as a tester and bug reporter for CarbonSpigot, a high-performance Minecraft server fork that powered our network to handle 150 players and 90 plugins seamlessly — all with zero lag.",
-      imageUrl: "/carbon.png", // Replace with actual image path
-      projectUrl: "https://refinedev.xyz/resources/carbon.15/", // Added link placeholder
-      projectLinkLabel: "View Product", // Added custom link label
-      
-    },
-  ]
-
-  // Define stagger animation for the container
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2, // Stagger the animation of children by 0.2s
-      },
-    },
-  };
-
-  return (
-    // Wrap the main section content
-    <AnimatedSection
-      id="projects"
-      className={styles.projectsSection}
-    >
-      <h2 className={styles.heading}>My Projects</h2>
-      {/* Use motion.div for the grid container to apply stagger animation */}
-      <motion.div
-        className={styles.gridContainer}
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible" // Animate children when the container becomes visible
-      >
-        {projects.map((project, index) => (
-          // ProjectCard itself is now a motion component, it will inherit animation control
-          <ProjectCard key={index} {...project} />
-        ))}
-      </motion.div>
-    </AnimatedSection>
-  );
-};
-
-export default ProjectsSection; 
+      {selected ? <article id={'project-panel-' + selected.id} role="tabpanel"
+        aria-labelledby={'project-tab-' + selected.id} className={styles.inspector} tabIndex={0}>
+        <div className={styles.previewTop}>
+          <span>{selected.imageLabel}</span>
+          <button type="button" onClick={() => setGalleryOpen(true)} aria-label={'Open ' + selected.title + ' gallery'}>Enlarge <Icon name="expand" size={15} /></button>
+        </div>
+        <div className={styles.preview} style={{ backgroundColor: selected.background }}>
+          <div key={selected.id + '-' + imageIndex} className={styles.imageLayer}>
+            <Image src={images[imageIndex]} alt={imageIndex === 0 ? selected.imageLabel + ' for ' + selected.title : selected.title + ' gallery image ' + imageIndex}
+              fill sizes="(max-width: 640px) 90vw, (max-width: 1000px) 65vw, 900px"
+              style={{ objectFit: 'contain' }} priority={selected.id === projects[0].id && imageIndex === 0}
+              onError={() => setImageError(true)} />
+          </div>
+          {imageError && <div className={styles.imageError}>Preview unavailable.<a className="text-link" href={images[imageIndex]} target="_blank" rel="noopener noreferrer">Open the original image</a></div>}
+        </div>
+        {images.length > 1 && <div className={styles.thumbnails} aria-label={selected.title + ' images'}>
+          {images.map((src, index) => <button key={src} type="button"
+            aria-label={'Show ' + selected.title + ' image ' + (index + 1)}
+            aria-pressed={imageIndex === index}
+            onClick={() => { setImageIndex(index); setImageError(false); }}>
+            <Image src={src} alt="" fill sizes="80px" style={{ objectFit: 'cover' }} />
+          </button>)}
+          <span>{imageIndex + 1} / {images.length}</span>
+        </div>}
+        <div className={styles.projectDetails} key={selected.id}>
+          <div className={styles.detailHeading}><h3>{selected.title}</h3><span>{selected.role}</span></div>
+          <p className={styles.projectStatus}>{selected.status}</p>
+          <p>{selected.description}</p>
+          {selected.highlights && <ul className={styles.engineeringNotes}>{selected.highlights.map(note => <li key={note}>{note}</li>)}</ul>}
+          {selected.relatedWork && <div className={styles.relatedWork}><h4>Related work</h4><ul>{selected.relatedWork.map(note => <li key={note}>{note}</li>)}</ul></div>}
+          <div className={styles.projectLinks}>
+            <button type="button" onClick={() => setGalleryOpen(true)}>{selected.placeholder ? 'View artwork' : 'Open gallery'}</button>
+            {selected.links?.map(link => <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a>)}
+            <span className={styles.technology}>{selected.tags.join(' / ')}</span>
+          </div>
+        </div>
+      </article> : <div className={styles.emptyState}><h3>No matching projects</h3><p>Try a project name, technology, or a different category.</p><button type="button" onClick={clearSearch}>Clear search and filters</button></div>}
+    </div>
+    {galleryOpen && selected && <Gallery key={selected.id} project={selected} initialImage={imageIndex} close={() => setGalleryOpen(false)} />}
+  </section>;
+}
