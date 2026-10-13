@@ -2,6 +2,10 @@
 
 A personal project workspace that retains V1's dark palette, Fira Code typography, restrained blue selection, and snowfall.
 
+[View the live portfolio](https://portfolio-filipkorazijas-projects.vercel.app/)
+
+![Portfolio preview](public/preview.jpg)
+
 ## Run locally
 
 ```sh
@@ -46,7 +50,7 @@ The 31 placeholder SVGs live in public/project-placeholders/. They are artwork, 
 
 ## Deploy on Vercel
 
-Import `filipkorazija/Portfolio`, use `main` as the production branch, select the Next.js preset, and leave the root directory as `./`. The portfolio needs no environment variables. Builds use `npm run build`. Fira Code is fetched through Next.js font optimization during the build; the deployed font is self-hosted.
+The existing Vercel project `portfolio` is connected to `filipkorazija/Portfolio`; pushes to `main` automatically deploy to production. It uses the Next.js preset with root directory `./`. The portfolio needs no environment variables. Builds use `npm run build`. Fira Code is fetched through Next.js font optimization during the build; the deployed font is self-hosted.
 
 For a direct deployment from this directory:
 
