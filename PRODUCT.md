@@ -30,7 +30,7 @@ The user authored the AI perspective and authorized editing its wording. The /ai
 The user is most active on Discord at `.astonic`. Offer the username with a copy action; no Discord user ID or invite URL was supplied. The LinkedIn profile is https://www.linkedin.com/in/filip-verk-kora%C5%BEija-8818112b5/?isSelfProfile=true. The top-left home identity is `[fk.]`.
 
 ## Private workplace projects
-PetrovicAPP and PetrovicSystem are included with user-authorized, general descriptions and technology labels only. Use neutral placeholder artwork. Do not copy workplace source code, screenshots, credentials, endpoints, data, internal workflows, or implementation details into portfolio assets or descriptions. Enterprise source repositories remain read-only.
+PetrovicAPP and PetrovicSystem retain user-authorized, general descriptions and technology labels. On 2026-10-18, Filip explicitly confirmed that the two supplied interface design boards contain no sensitive details and authorized publishing them unchanged. This approval covers those two images only. Do not copy workplace source code, credentials, private endpoints, data, internal workflows, or implementation details into portfolio assets or descriptions. Enterprise source repositories remain read-only.
 
 ## Writing preference
 Use simple punctuation and avoid em dashes in portfolio copy, page titles, and labels.

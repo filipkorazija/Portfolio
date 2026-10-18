@@ -42,7 +42,7 @@ The redesign is developed on `redesign/v2`; `main` is the production branch. V1 
 
 ## Replacing placeholders
 
-The 31 placeholder SVGs live in public/project-placeholders/. They are artwork, not product screenshots. To replace one, put the real image in public/, update image and imageLabel in the project record, and set placeholder: false. Optional gallery entries provide more images. The four retained original projects keep their real original assets. No dates, delivery claims, scores, or demo URLs were invented.
+Twenty projects retain explicitly labeled artwork from `public/project-placeholders/`. Eleven projects now use 25 images supplied by Filip in `public/project-media/`, alongside the four projects with original repository imagery. The media manifest records source filenames and SHA-256 hashes; the supplied files are copied unchanged. Labels distinguish prototypes, development captures, and design boards. Both Petrovic boards were explicitly approved for publication by Filip. To replace a remaining placeholder, update image and imageLabel in the project record, set placeholder: false, and add optional gallery entries. No dates, delivery claims, scores, or demo URLs were invented.
 
 ## AI page
 

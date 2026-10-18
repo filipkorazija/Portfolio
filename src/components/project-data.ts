@@ -37,10 +37,10 @@ export const projects: Project[] = [
       "Fastify",
       "PostgreSQL"
     ],
-    "image": "/project-placeholders/prismac.svg",
-    "imageLabel": "Placeholder artwork",
+    "image": "/project-media/prismac/website.png",
+    "imageLabel": "PrismAC website and development captures",
     "background": "#11151c",
-    "placeholder": true,
+    "placeholder": false,
     "featured": true,
     "highlights": [
       "50+ detection checks across six categories",
@@ -50,6 +50,12 @@ export const projects: Project[] = [
     "relatedWork": [
       "Signed loader and server sensors",
       "Verification, encryption, and secure cloud communication"
+    ],
+    "gallery": [
+      "/project-media/prismac/risk-board.png",
+      "/project-media/prismac/events.png",
+      "/project-media/prismac/detection-log.png",
+      "/project-media/prismac/sensor-status.png"
     ]
   },
   {
@@ -123,10 +129,10 @@ export const projects: Project[] = [
       "Android",
       "Jetpack Compose"
     ],
-    "image": "/project-placeholders/petrovic-app.svg",
-    "imageLabel": "Placeholder artwork",
+    "image": "/project-media/petrovic-app/design-board.png",
+    "imageLabel": "Mobile interface design board",
     "background": "#11151c",
-    "placeholder": true
+    "placeholder": false
   },
   {
     "id": "petrovic-system",
@@ -142,10 +148,10 @@ export const projects: Project[] = [
       "React",
       "TypeScript"
     ],
-    "image": "/project-placeholders/petrovic-system.svg",
-    "imageLabel": "Placeholder artwork",
+    "image": "/project-media/petrovic-system/design-board.png",
+    "imageLabel": "Web interface design board",
     "background": "#11151c",
-    "placeholder": true
+    "placeholder": false
   },
   {
     "id": "riftcore",
@@ -163,10 +169,10 @@ export const projects: Project[] = [
       "Cloudflare",
       "MySQL"
     ],
-    "image": "/project-placeholders/riftcore.svg",
-    "imageLabel": "Placeholder artwork",
+    "image": "/project-media/riftcore/hub.png",
+    "imageLabel": "In-game development captures",
     "background": "#11151c",
-    "placeholder": true,
+    "placeholder": false,
     "featured": true,
     "highlights": [
       "Custom plugins, economies, ranks, and progression",
@@ -175,6 +181,12 @@ export const projects: Project[] = [
     "relatedWork": [
       "RiftCore custom plugins",
       "SkyPvP, Lifesteal, Prison, Mines, and Dungeons work"
+    ],
+    "gallery": [
+      "/project-media/riftcore/players.png",
+      "/project-media/riftcore/enchanting.png",
+      "/project-media/riftcore/player-list.png",
+      "/project-media/riftcore/pickaxe.png"
     ]
   },
   {
@@ -191,10 +203,10 @@ export const projects: Project[] = [
       "Mobile",
       "Procedural assets"
     ],
-    "image": "/project-placeholders/timberline.svg",
-    "imageLabel": "Placeholder artwork",
+    "image": "/project-media/timberline/gameplay.png",
+    "imageLabel": "Unity development capture",
     "background": "#11151c",
-    "placeholder": true,
+    "placeholder": false,
     "featured": true,
     "highlights": [
       "Worker automation, resource logistics, and progression",
@@ -241,10 +253,10 @@ export const projects: Project[] = [
       "Unity Transport",
       "Docker"
     ],
-    "image": "/project-placeholders/color-conquest.svg",
-    "imageLabel": "Placeholder artwork",
+    "image": "/project-media/color-conquest/match-result.png",
+    "imageLabel": "Unity development capture",
     "background": "#11151c",
-    "placeholder": true,
+    "placeholder": false,
     "featured": true,
     "highlights": [
       "Real-time multiplayer and dedicated-server architecture",
@@ -267,10 +279,10 @@ export const projects: Project[] = [
       "Linux",
       "PM2"
     ],
-    "image": "/project-placeholders/shortpilot.svg",
-    "imageLabel": "Placeholder artwork",
+    "image": "/project-media/shortpilot/trend-discovery.png",
+    "imageLabel": "Prototype interface captures",
     "background": "#11151c",
-    "placeholder": true,
+    "placeholder": false,
     "featured": true,
     "highlights": [
       "AI-assisted content generation workflows",
@@ -278,6 +290,10 @@ export const projects: Project[] = [
     ],
     "relatedWork": [
       "Planned publishing automation"
+    ],
+    "gallery": [
+      "/project-media/shortpilot/website.png",
+      "/project-media/shortpilot/dashboard.png"
     ]
   },
   {
@@ -293,14 +309,19 @@ export const projects: Project[] = [
       "Mobile development",
       "AI integrations"
     ],
-    "image": "/project-placeholders/day-one.svg",
-    "imageLabel": "Placeholder artwork",
+    "image": "/project-media/day-one/target-area.jpg",
+    "imageLabel": "Mobile prototype screens",
     "background": "#11151c",
-    "placeholder": true,
+    "placeholder": false,
     "highlights": [
       "Gym and home workout tracking",
       "Meal-photo nutrition analysis and body-progress timeline",
       "Muscle selection and AI body-potential visualization work"
+    ],
+    "gallery": [
+      "/project-media/day-one/workout.jpg",
+      "/project-media/day-one/profile.jpg",
+      "/project-media/day-one/settings.jpg"
     ]
   },
   {
@@ -344,10 +365,10 @@ export const projects: Project[] = [
       "Kalshi API",
       "Paper trading"
     ],
-    "image": "/project-placeholders/gemma.svg",
-    "imageLabel": "Placeholder artwork",
+    "image": "/project-media/gemma/paper-crew.jpg",
+    "imageLabel": "Paper-trading research interface",
     "background": "#11151c",
-    "placeholder": true,
+    "placeholder": false,
     "highlights": [
       "Settlement-price modelling and an official-index connection",
       "Execution simulations account for fees, depth, partial fills, and delays",
@@ -371,14 +392,17 @@ export const projects: Project[] = [
       "TypeScript",
       "2D / 3D geometry"
     ],
-    "image": "/project-placeholders/foldra.svg",
-    "imageLabel": "Placeholder artwork",
+    "image": "/project-media/foldra/catalogue.png",
+    "imageLabel": "Desktop prototype with synthetic demo data",
     "background": "#11151c",
-    "placeholder": true,
+    "placeholder": false,
     "highlights": [
       "Catalogue authoring with stale-edit protection and published snapshots",
       "2D profile editing with a synchronized 3D preview",
       "Local Shop, orders, and production-workflow prototypes; production readiness and manufacturing compatibility remain ongoing work"
+    ],
+    "gallery": [
+      "/project-media/foldra/sign-in.png"
     ]
   },
   {
@@ -529,10 +553,10 @@ export const projects: Project[] = [
       "Content automation",
       "Workflow design"
     ],
-    "image": "/project-placeholders/faceless-video.svg",
-    "imageLabel": "Placeholder artwork",
+    "image": "/project-media/faceless-video/render-interface.png",
+    "imageLabel": "Video automation prototype",
     "background": "#11151c",
-    "placeholder": true,
+    "placeholder": false,
     "highlights": [
       "Research-to-script-to-voice production flow",
       "Short- and long-form content workflow exploration"

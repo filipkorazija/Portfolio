@@ -224,7 +224,7 @@ Roving tab focus, arrow keys, Home, and End move selection. The linked tabpanel 
 
 Large previews and gallery images use `object-fit: contain` so identity artwork, screenshots, and source-code images stay intact. Thumbnails alone use `cover`; unselected thumbnails sit at opacity (0.65), becoming fully opaque on hover or selection. The portrait uses `cover` with `object-position: center 30%`. Preserve supplied project assets and portrait; no generated imagery or decorative stock assets are introduced.
 
-The first ProjectIce image is prioritized. An image-load failure reveals a textual fallback with a link to the original asset. Project and thumbnail image changes reveal top-to-bottom with a (420ms) clipping animation and `cubic-bezier(.16,1,.3,1)` easing. Text remains stationary.
+The initial PrismAC website image is prioritized. An image-load failure reveals a textual fallback with a link to the original asset. Project and thumbnail image changes reveal top-to-bottom with a (420ms) clipping animation and `cubic-bezier(.16,1,.3,1)` easing. Text remains stationary.
 
 ### Gallery
 
@@ -261,7 +261,7 @@ Documentation evidence: PRODUCT.md, the selected surface contract, globals and c
 
 The `/ai` route inherits the dark Fira Code world, shared header, snowfall control, and footer. Its reading structure uses a left-aligned 38–64px title, a muted introduction, four plain text sections, and a maximum 70ch body measure. The body uses the existing 14px reading style and 1.9 line height. Section titles remain 21px; spacing is 48px on desktop and 36px on phones. No decorative panels or additional visual effects are introduced. AI is a top-level navigation link with `aria-current="page"`; homepage section links resolve correctly from both routes.
 
-The skills heading is followed by a muted, readable experience disclaimer. Project imagery now includes 31 placeholder assets and four retained original project records; the collection remains 35 entries.
+The skills heading is followed by a muted, readable experience disclaimer. Twenty projects retain placeholder artwork. Eleven projects use 25 supplied images, alongside four retained original project records; the collection remains 35 entries. Supplied images stay intact, with labels identifying prototypes, development captures, and the two approved workplace design boards.
 
 ## Contact and identity update
 

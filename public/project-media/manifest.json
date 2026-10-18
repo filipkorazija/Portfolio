@@ -1,0 +1,157 @@
+{
+  "origin": "Project images supplied by Filip Koražija on 2026-10-18",
+  "processing": "Copied byte-for-byte from the supplied files. Previews use Next.js image optimization; originals remain available at the listed paths.",
+  "workplaceApproval": "The owner explicitly confirmed both Petrovic design boards contain no sensitive details and authorized using them as provided.",
+  "assets": [
+    {
+      "project": "prismac",
+      "originalFilename": "prismweb.png",
+      "path": "/project-media/prismac/website.png",
+      "sha256": "e8bb3d05a4e7f6aff4fe2cfac9c4e249c42c45835c835a41cd245579df4e70eb"
+    },
+    {
+      "project": "prismac",
+      "originalFilename": "prismpanel1.png",
+      "path": "/project-media/prismac/risk-board.png",
+      "sha256": "b8f70000447e93b720c13e20fd869bd4a743dccb26c9e07799f60e1e776d054f"
+    },
+    {
+      "project": "prismac",
+      "originalFilename": "prismpanel2.png",
+      "path": "/project-media/prismac/events.png",
+      "sha256": "2737d60351fbb1c2f5a20259619d013fb5aa4de682b3e8c3dbc765fcdca3c28e"
+    },
+    {
+      "project": "prismac",
+      "originalFilename": "prismpanel3.png",
+      "path": "/project-media/prismac/detection-log.png",
+      "sha256": "7ce0268b1fa4b2eeb247119e6c78965996ae2dd52a2e9a908874b898456831f2"
+    },
+    {
+      "project": "prismac",
+      "originalFilename": "prismpanel4.png",
+      "path": "/project-media/prismac/sensor-status.png",
+      "sha256": "06d1beb302a1bc529b5648c35917ab4548032aaddc5b4bbad759367a38fe6c36"
+    },
+    {
+      "project": "riftcore",
+      "originalFilename": "riftcore2.png",
+      "path": "/project-media/riftcore/hub.png",
+      "sha256": "1b22559a08f155ffb94536998e3035131fa72b8403daf8a9a0dd0d8b417b32b2"
+    },
+    {
+      "project": "riftcore",
+      "originalFilename": "riftcore1.png",
+      "path": "/project-media/riftcore/players.png",
+      "sha256": "b81a09f2e2ba978ca8ee22c9689db7c059e626a26faee7bdb99f21916201066a"
+    },
+    {
+      "project": "riftcore",
+      "originalFilename": "riftcore3.png",
+      "path": "/project-media/riftcore/enchanting.png",
+      "sha256": "5f068c2e9cb25e76072832f04024a59e45ef993d574f8d38095ded63c05829b1"
+    },
+    {
+      "project": "riftcore",
+      "originalFilename": "riftcore4.png",
+      "path": "/project-media/riftcore/player-list.png",
+      "sha256": "e452ddc39c3baabaab164815615f08c8185da6570636024447819b96c565555b"
+    },
+    {
+      "project": "riftcore",
+      "originalFilename": "riftcore.png",
+      "path": "/project-media/riftcore/pickaxe.png",
+      "sha256": "69f5c38a799a69f1b1921bfc5deeeda85618926f2298b7e92f5e7d35eaffc7f3"
+    },
+    {
+      "project": "timberline",
+      "originalFilename": "timerline.png",
+      "path": "/project-media/timberline/gameplay.png",
+      "sha256": "306f1ee0b64a14f2f0ddd5aa897b7dcb27f65ded666a33e34f1dd3e7fc66632b"
+    },
+    {
+      "project": "color-conquest",
+      "originalFilename": "colorconquest.png",
+      "path": "/project-media/color-conquest/match-result.png",
+      "sha256": "3fe42997268c18e3e04616b2fd4021e79c340e1dd0c1d9f7eea39e133a437919"
+    },
+    {
+      "project": "faceless-video",
+      "originalFilename": "youtubeautomation.png",
+      "path": "/project-media/faceless-video/render-interface.png",
+      "sha256": "b2059cac24c18ba4845a4048ed45e528fb42a818ab2b40df656bdc08a215303f"
+    },
+    {
+      "project": "shortpilot",
+      "originalFilename": "shortpilot2.png",
+      "path": "/project-media/shortpilot/trend-discovery.png",
+      "sha256": "4077a3c617ac40614fd1fcd35dc2ae04352c66f17fb651321d154d2350075bbc"
+    },
+    {
+      "project": "shortpilot",
+      "originalFilename": "shortpilot.png",
+      "path": "/project-media/shortpilot/website.png",
+      "sha256": "9f462cd428817212e8b6681895050627bc4e33174082e5ac2eb0fa3218eb7694"
+    },
+    {
+      "project": "shortpilot",
+      "originalFilename": "shortpilot1.png",
+      "path": "/project-media/shortpilot/dashboard.png",
+      "sha256": "2210b92eec53d37c6a34899aac4a03fdef482821416b1ef2593b3a55dda69732"
+    },
+    {
+      "project": "day-one",
+      "originalFilename": "dayone4.jpg",
+      "path": "/project-media/day-one/target-area.jpg",
+      "sha256": "7c321f03717379c9a2030f252b680c55a32a700f779723bba5859ab2576696ba"
+    },
+    {
+      "project": "day-one",
+      "originalFilename": "dayone1.jpg",
+      "path": "/project-media/day-one/workout.jpg",
+      "sha256": "ee8b5b61f15e41afab204a96020b065cf5b6fe3b141b1f7a7eb26745c45bd051"
+    },
+    {
+      "project": "day-one",
+      "originalFilename": "dayone3.jpg",
+      "path": "/project-media/day-one/profile.jpg",
+      "sha256": "a8cb7fd9869be957b53c2f95e6af285df779e006ee9f9acd6d4b1dddd37c0e70"
+    },
+    {
+      "project": "day-one",
+      "originalFilename": "dayone2.jpg",
+      "path": "/project-media/day-one/settings.jpg",
+      "sha256": "b205ec9def509ea0cd48f779f8f1824f233aefb6042977a91554c0045710b644"
+    },
+    {
+      "project": "foldra",
+      "originalFilename": "foldra2.png",
+      "path": "/project-media/foldra/catalogue.png",
+      "sha256": "e0939444a384e4d55706449af08faa48ca47d1d76b06d425bd42bb7f96571a6c"
+    },
+    {
+      "project": "foldra",
+      "originalFilename": "foldra1.png",
+      "path": "/project-media/foldra/sign-in.png",
+      "sha256": "271abb7aecda5cf6b2b21de51bf61706de2281be38953c983b80389991e50202"
+    },
+    {
+      "project": "gemma",
+      "originalFilename": "gemma.jpg",
+      "path": "/project-media/gemma/paper-crew.jpg",
+      "sha256": "6dcf0443bfc83f10e23b7a7980d73e0b1a69f4d48a4fa44cddb3207dac185354"
+    },
+    {
+      "project": "petrovic-app",
+      "originalFilename": "petrovicapp.png",
+      "path": "/project-media/petrovic-app/design-board.png",
+      "sha256": "3acb9a5ce9f762589e1c11eb771bd74b3c97d9b0f7af22a780c13d383557392a"
+    },
+    {
+      "project": "petrovic-system",
+      "originalFilename": "petrovicsystem.png",
+      "path": "/project-media/petrovic-system/design-board.png",
+      "sha256": "702babddd261a7d7f9224ee05fb4e7ae16066a47d2d6e5d0ebab16a7bd021877"
+    }
+  ]
+}
